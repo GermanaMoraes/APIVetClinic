@@ -37,7 +37,10 @@ namespace APIVetClinic.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// Listar as Consultas
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Listar()
         {
@@ -58,7 +61,12 @@ namespace APIVetClinic.Controllers
 
         }
 
-               
+        /// <summary>
+        /// Alterar uma consulta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="consulta"></param>
+        /// <returns></returns>        
         [HttpPut("{id}")]
         public IActionResult Alterar(int id, Consultas consulta)
         {
@@ -83,7 +91,11 @@ namespace APIVetClinic.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// Deletar alguma consulta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public IActionResult Deletar(int id)
         {

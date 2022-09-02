@@ -57,7 +57,8 @@ namespace APIVetClinic.Repositories
                                 Sexo = (string)reader[4],
                                 Idade = (int)reader[5],
                                 IdProprietario = (int)reader[6],
-                                IdEspecie = (int)reader[7]
+                                IdEspecie = (int)reader[7],
+                                Imagem = (string)reader[8].ToString()
 
                             });
                         }
@@ -110,19 +111,20 @@ namespace APIVetClinic.Repositories
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                string query = "INSERT INTO Animal (Nome, Raca, Peso, Sexo, Idade, IdProprietario, IdEspecie) " +
-                    "VALUES (@Nome, @Raca, @Peso, @Sexo,@Idade, @IdProprietario, @IdEspecie)";
+                string query = "INSERT INTO Animal (Nome, Raca, Peso, Sexo, Idade, IdProprietario, IdEspecie, Imagem) " +
+                    "VALUES (@Nome, @Raca, @Peso, @Sexo,@Idade, @IdProprietario, @IdEspecie, @Imagem)";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.Add("@IdAnimal", SqlDbType.Int).Value = animal.IdAnimal;
                     cmd.Parameters.Add("@Nome", System.Data.SqlDbType.VarChar).Value = animal.Nome;
-                    cmd.Parameters.Add("@Raca", SqlDbType.NChar).Value = animal.Raca;
+                    cmd.Parameters.Add("@Raca", SqlDbType.NVarChar).Value = animal.Raca;
                     cmd.Parameters.Add("@Peso", SqlDbType.Decimal).Value = animal.Peso;
                     cmd.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = animal.Sexo;
                     cmd.Parameters.Add("@Idade", SqlDbType.Int).Value = animal.Idade;
                     cmd.Parameters.Add("@IdProprietario", SqlDbType.Int).Value = animal.IdProprietario;
                     cmd.Parameters.Add("@IdEspecie", SqlDbType.Int).Value = animal.IdEspecie;
+                    cmd.Parameters.Add("@Imagem", SqlDbType.NChar).Value = animal.Imagem;
 
 
                     cmd.CommandType = CommandType.Text;

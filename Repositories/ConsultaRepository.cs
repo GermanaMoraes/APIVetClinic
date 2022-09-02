@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace APIVetClinic.Repositories
 {
-    public class ConsultaRepository : Consultas
+    public class ConsultaRepository : IConsultas
     {
         readonly string connectionString = "data source = (localdb)\\MSSQLLocalDB;Integrated Security = true; Initial Catalog= VetClinic ";
 
@@ -137,7 +137,6 @@ namespace APIVetClinic.Repositories
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.Add("@IdConsulta", SqlDbType.Int).Value = id;
-                    cmd.Parameters.Add("@IdAnimal", SqlDbType.Int).Value = consulta.IdAnimal;
                     cmd.Parameters.Add("@Horario", System.Data.SqlDbType.DateTime).Value = consulta.Horario;
                     cmd.Parameters.Add("@IdAnimal", SqlDbType.Int).Value = consulta.IdAnimal;
                     cmd.Parameters.Add("@IdVeterinario", SqlDbType.Int).Value = consulta.IdVeterinario;

@@ -13,6 +13,8 @@ namespace APIVetClinic.Models
         public decimal Peso { get; set; }
          public string Sexo { get; set; }
         public int Idade { get; set; }
+
+        public string Imagem { get; set; }
         
         //Foreign Key´s
         public int IdProprietario { get; set; }

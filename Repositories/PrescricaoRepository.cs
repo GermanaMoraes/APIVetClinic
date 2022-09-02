@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace APIVetClinic.Repositories
 {
-    public class PrescricaoRepository : Prescricoes
+    public class PrescricaoRepository : IPrescricao
     {
         readonly string connectionString = "data source = (localdb)\\MSSQLLocalDB;Integrated Security = true; Initial Catalog= VetClinic ";
 

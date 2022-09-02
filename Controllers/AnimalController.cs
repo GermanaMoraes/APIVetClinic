@@ -1,5 +1,6 @@
 ﻿using APIVetClinic.Models;
 using APIVetClinic.Repositories;
+using APIVetClinic.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,15 +13,27 @@ namespace APIVetClinic.Controllers
         private AnimalRepository repositorio = new AnimalRepository();
 
         /// <summary>
-        /// Cadastrar um Animal
+        /// Cadastrar um animal
         /// </summary>
         /// <param name="animal"></param>
+        /// <param name="arquivo"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Cadastrar(Animais animal)
+        public IActionResult Cadastrar([FromForm] Animais animal, IFormFile arquivo)
         {
             try
             {
+                #region Upload de Imagem
+                string[] extensoesPermitidas = { "jpeg", "jpg", "png", "svg" };
+                string UploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas, "Images");
+
+                if (UploadResultado == "")
+                {
+                    return BadRequest("Arquivo não encontrado ou extensão não permitida");
+                }
+
+                animal.Imagem = UploadResultado;
+                #endregion
                 repositorio.Insert(animal);
                 return Ok(animal);
             }
@@ -123,17 +136,4 @@ namespace APIVetClinic.Controllers
         }
 
     }
-
 }
-
-
-
-
-
-
-
-
-    
-
-
-  
