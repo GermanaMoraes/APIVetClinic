@@ -79,7 +79,7 @@ namespace APIVetClinic
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")
                     ),
-                RequestPath = "/Files"
+                RequestPath = "/StaticFiles"
                 });
             
                     
