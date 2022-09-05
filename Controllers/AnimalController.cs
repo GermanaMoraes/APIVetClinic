@@ -23,17 +23,8 @@ namespace APIVetClinic.Controllers
         {
             try
             {
-                #region Upload de Imagem
-                string[] extensoesPermitidas = { "jpeg", "jpg", "png", "svg" };
-                string UploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas, "Images");
+                              
 
-                if (UploadResultado == "")
-                {
-                    return BadRequest("Arquivo não encontrado ou extensão não permitida");
-                }
-
-                animal.Imagem = UploadResultado;
-                #endregion
                 repositorio.Insert(animal);
                 return Ok(animal);
             }
@@ -85,10 +76,6 @@ namespace APIVetClinic.Controllers
         {
             try
             {
-                var buscarAnimal = repositorio.GetbyId(id);
-                if (buscarAnimal == null)
-                { return NotFound(); }
-
                 var usuarioAlterado = repositorio.Update(id, animal);
 
                 return Ok(animal);
@@ -114,12 +101,7 @@ namespace APIVetClinic.Controllers
         {
             try
             {
-                var buscarAnimal = repositorio.GetbyId(id);
-                if (buscarAnimal == null)
-                {
-                    return NotFound();
-                }
-
+                
                 repositorio.Delete(id);
 
                 return Ok(new { msg = "Animal removido com sucesso" });

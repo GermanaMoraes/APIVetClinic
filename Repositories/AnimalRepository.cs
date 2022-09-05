@@ -70,41 +70,8 @@ namespace APIVetClinic.Repositories
             return animal;
         }
 
-        //Listar um Animal específico pelo Id
-        public Animais GetbyId(int id)
-        {
-            var animal = new Animais();
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                con.Open();
-
-                string query = "SELECT * FROM Animal WHERE IdAnimal = @IdAnimal";
-
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.Add("@IdAnimal", SqlDbType.Int).Value = id;
-                    // Ler a Lista
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            animal.IdEspecie = (int)reader[0];
-                            animal.Nome = (string)reader[1];
-                            animal.Raca = (string)reader[2];
-                            animal.Peso = (int)reader[3];
-                            animal.Sexo = (string)reader[4];
-                            animal.Idade = (int)reader[5];
-                            animal.IdProprietario = (int)reader[6];
-                            animal.IdEspecie = (int)reader[7];
-                        }
-                    }
-
-                }
-
-            }
-            return animal;
-        }
-
+        
+       
         //Adciona os Animais no banco de dados
         public Animais Insert(Animais animal)
         {
@@ -140,8 +107,14 @@ namespace APIVetClinic.Repositories
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                string query = "UPDATE Animal SET Nome= @Nome,Raca= @Raca, Peso= @Peso," +
-                    " Sexo= @Sexo, Idade= @Idade, IdProprietario=@IdProprietario, IdEspecie=@IdEspecie" +
+                string query = "UPDATE Animal SET" +
+                    " Nome= @Nome," +
+                    "Raca= @Raca," +
+                    " Peso= @Peso," +
+                    " Sexo= @Sexo," +
+                    " Idade= @Idade," +
+                    " IdProprietario=@IdProprietario," +
+                    " IdEspecie=@IdEspecie" +
                     " WHERE IdAnimal= @IdAnimal";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
@@ -154,6 +127,7 @@ namespace APIVetClinic.Repositories
                     cmd.Parameters.Add("@Idade", SqlDbType.Int).Value = animal.Idade;
                     cmd.Parameters.Add("@IdProprietario", SqlDbType.Int).Value = animal.IdProprietario;
                     cmd.Parameters.Add("@IdEspecie", SqlDbType.Int).Value = animal.IdEspecie;
+                   
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     animal.IdAnimal = id;

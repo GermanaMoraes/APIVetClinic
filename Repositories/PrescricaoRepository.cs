@@ -104,14 +104,15 @@ namespace APIVetClinic.Repositories
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                string query = "INSERT INTO Prescricao (Descricao, IdAnimal, IdVeterinario) " +
-                    "VALUES (@Descricao, @IdAnimal, @IdVeterinario)";
+                string query = "INSERT INTO Prescricao (Descricao, IdAnimal, IdMedicamento, IdVeterinario) " +
+                    "VALUES (@Descricao, @IdAnimal,@IdMedicamento, @IdVeterinario)";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.Add("@IdPrescricao", SqlDbType.Int).Value = prescricao.IdPrescricao;
                     cmd.Parameters.Add("@Descricao", System.Data.SqlDbType.VarChar).Value = prescricao.Descricao;
                     cmd.Parameters.Add("@IdAnimal", SqlDbType.Int).Value = prescricao.IdAnimal;
+                    cmd.Parameters.Add("@IdMedicamento", SqlDbType.Int).Value = prescricao.IdMedicamento;
                     cmd.Parameters.Add("@IdVeterinario", SqlDbType.Int).Value = prescricao.IdVeterinario;
                    
                     cmd.CommandType = CommandType.Text;
